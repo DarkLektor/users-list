@@ -1,0 +1,26 @@
+@import 'fonts';
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, serif;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+button {
+  border: 0;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.container {
+  width: 90vw;
+  margin: 0 auto;
+}
