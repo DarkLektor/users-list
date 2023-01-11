@@ -24,6 +24,6 @@ git commit -m 'deploy'
 #git push -f git@github.com:darklektor/darklektor.github.io.git main
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
- git push -f git@github.com:darklektor/users-list.git main:gh-pages
+ git push -f git@github.com:DarkLektor/users-list.git main:gh-pages
 
 cd -
