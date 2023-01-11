@@ -1,16 +1,29 @@
 <script setup>
 import SvgClean from "@/components/svg/Clean.vue";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 
-const emit = defineEmits(['search'])
+const emit = defineEmits(['update:modelValue', 'clearFilters'])
+const props = defineProps({
+  modelValue: String,
+  activeClearBtn: Boolean
+})
 const timer = ref(null)
+
+const searchTerm = computed({
+  set(val) {
+    emit("update:modelValue", val)
+  },
+  get() {
+    return props.modelValue
+  }
+})
 
 function debounce(event) {
   if (timer.value) {
     clearTimeout(timer.value)
   }
   timer.value = setTimeout(() => {
-    emit('search', event.target.value.trim().toLowerCase())
+    searchTerm.value = event.target.value.trim().toLowerCase()
   }, 700)
 }
 </script>
@@ -20,13 +33,14 @@ function debounce(event) {
     <div class="wrapper">
       <img alt="search" class="search__input__img" src="/images/search.svg">
       <input
+          :value="searchTerm"
           class="search__input"
           placeholder="Поиск по имени или e-mail"
           type="text"
           @input="debounce"
       />
     </div>
-    <button class="search__clear-btn">
+    <button v-if="props.activeClearBtn" class="search__clear-btn" @click="emit('clearFilters')">
       <SvgClean class="search__clear-btn__ico" />
       <span class="search__clear-btn__text">Очистить фильтр</span>
     </button>

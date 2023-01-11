@@ -1,5 +1,6 @@
 <script setup>
-
+const emit = defineEmits(['setSort'])
+const props = defineProps(['sort'])
 </script>
 
 <template>
@@ -7,10 +8,18 @@
     <span class="sort__desc">
       Сортировка:
     </span>
-    <button class="sort__btn active">
+    <button
+        :class="{active: props.sort === 'date-asc' || props.sort === 'date-desc'}"
+        class="sort__btn"
+        @click="emit('setSort', props.sort === 'date-asc' ?  'date-desc' : 'date-asc')"
+    >
       Дата регистрации
     </button>
-    <button class="sort__btn">
+    <button
+        :class="{active: props.sort === 'rating-asc' || props.sort === 'rating-desc'}"
+        class="sort__btn"
+        @click="emit('setSort', props.sort === 'rating-asc' ?  'rating-desc' : 'rating-asc')"
+    >
       Рейтинг
     </button>
   </div>
